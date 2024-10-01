@@ -33,4 +33,24 @@ Player 2 - Global Business Engineer   - Team management
 ![image](https://github.com/user-attachments/assets/2f34bb73-a52f-4b08-b145-ffdbf868fab6)
 
 #### Task 2: Create 3D Models for schoolmon
+##### XR - Schoolmon
+The idea in the approach:
+- Drawing the model in 2D using paint
+- Using online tool to reformat the 2D .png to a 3D model.
+- Import model to unity
+
+An online tool called Tripo was used to reformat the 2D image to a 3D model - however it was found that the software used for the reformatting is for humanoid creatures, although it might not seem like it - the 2D model was supposed to look like it had 4 legs.
+Alas the sub-optimal 3D model was imported to unity to see it in action, but in the process of converting the online 3D model and importing it seems some parts of the 3D model were left out. No materials where provided for the model, and the rigging that the software was supposed to do, didnt come with either.
+
+Another approach for converting the 2D image and importing it
+###### 2D image
+![image](https://github.com/user-attachments/assets/fdb3ef60-d6f7-4419-ba3a-5eb8e877bba0)
+###### 3D model
+![image](https://github.com/user-attachments/assets/7f09c580-6b4d-4fb6-9c85-963817f5c7c7)
+###### 3D model imported to unity
+![image](https://github.com/user-attachments/assets/4bcf8ff5-a213-4fa7-b34b-6c0ee0bc239e)
+
+
+
+
 
