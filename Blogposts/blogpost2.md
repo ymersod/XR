@@ -27,4 +27,10 @@ Player 2 - Global Business Engineer   - Team management
 8. Player 1 can now catch the Team management Schoolmon!
 9. The team management Schoolmon is added to player 1's team
 
+### Tasks for 01/10/24
 #### Task 1: Setup repository and make som virtual tracking of cards
+
+![image](https://github.com/user-attachments/assets/2f34bb73-a52f-4b08-b145-ffdbf868fab6)
+
+#### Task 2: Create 3D Models for schoolmon
+
