@@ -81,7 +81,7 @@ Here is a pic of the android tracking the image:
 
 Jep, thats pretty mush it, love and all that!
 
-#### Task 2: Create 3D Models for schoolmon
+#### Task 2: Create 3D model for the XR-Course-mon
 
 ##### XR - Schoolmon
 
@@ -107,3 +107,7 @@ Another approach for converting the 2D image and importing it
 ###### 3D model imported to unity
 
 ![image](https://github.com/user-attachments/assets/4bcf8ff5-a213-4fa7-b34b-6c0ee0bc239e)
+
+
+#### Task 3 : Create 3D model for SDJ-course-mon
+- Merthe blogpost :)
