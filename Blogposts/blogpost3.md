@@ -47,7 +47,7 @@ RPC(_remote procedure callbacks_) calls are how a request is sent to master serv
 
 ![image](https://github.com/user-attachments/assets/a23a7775-843a-4ef6-8021-ccfcc8306bd2)
 After the request is handled by the server it returns the Callback on the **ChangeScene** function. 
-As seen in the screenshot it's annotated with ```[RPC]``` this means that this method can be used a Remote Procedure Callback.
+As seen in the screenshot it's annotated with ```[PunRPC]``` this means that this method can be used a Remote Procedure Callback.
 This method will then change the scene on all clients connected to the room.
 
 ##### Task 3 : Animate SDJ-course-mon
