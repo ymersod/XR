@@ -150,25 +150,36 @@ As seen in the screenshot it's annotated with `[PunRPC]` this means that this me
 This method will then change the scene on all clients connected to the room.
 
 ##### Task 3 : Animate SDJ-course-mon
+
 - Merethe :)
 
 ##### Next steps
+
 We still have some features we want the project to have before we feel like our MVP is complete. Below is some of the key elements we'll be working on for our (_probably_) last devlog for **project schoolmon**
 
 ###### Fighting
+
 To have a complete loop it makes sense for us, that two players having joined the same lobby is able to fight each other with their mons.
 The key elements we need to make before this feature is complete, from our understanding is:
+
 - Healthbar to the mons
 - Attacking the opposing mon, by answering 1 of 4 questions
-    - Simple system to calculate damage done to healthbar
-    - '_despawning'_ mon when health < 0
+  - Simple system to calculate damage done to healthbar
+  - '_despawning'_ mon when health < 0
 
 ###### Networking in the game
+
 We have done the setup, and can now connect to players to our photon masterserver. However we have yet to actualize using it in the games scene.
 Some of the key elements we want to work on for this part is:
-- Tracking opposing player (_with a nametag?_) that matches their chosen nickname
+
 - Finding a way to handle whos mon is whos
 - Setting up turnbased actions
-- 
+
+###### Missing states
+
+- What should happen when a card cant be found anymore, when the camera is looking at the position where the card should be.
+- The switch mon state is not gonna work as intended, we will only have 2 mons in game, one for each player, so no need for switching.
+
 ###### Animations??
+
 Er der noget logik her der skal laves her Merethe til de forskellige animationer? :D
