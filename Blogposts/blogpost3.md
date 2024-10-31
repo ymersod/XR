@@ -163,7 +163,7 @@ Now i was ready to add animations in form of poses. To do this, i added an "arma
 
 ![Picture5](https://github.com/user-attachments/assets/8f575625-9bef-4f28-b873-902d303629ec)
 
-It quickly became clear that some parts of Bugsy weren’t connected as i thought. For instance, it was important to use weight painting to indicate which body parts should move when the bones are manipulated, as Blender’s automatic weights weren’t quite accurate. It was also important to consider where to place the bones to make it easier to move the different parts when adding animations. I found inspiration from animal skeletons online.
+It quickly became clear that some parts of Bugsy weren’t connected as i thought. For instance, it was important to use weight painting to indicate which body parts should move when the bones are manipulated, as Blender’s automatic weights weren’t quite accurate. It was also important to consider where to place the bones to make it easier to move the different parts when adding animations. I found inspiration from animal skeletons online (not as creepy as it sounds).
 
 Since Bugsy isn’t a humanoid figure, it was difficult to find automatic animations online, so i had to explore and add keyframes myself.
 
