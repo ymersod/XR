@@ -152,9 +152,11 @@ This method will then change the scene on all clients connected to the room.
 ##### Task 3 : Animate SDJ-course-mon
 
 With some light feedback, Bugsy in his current state was a good fit for a horror game, so he received an upgrade to look a bit friendlier.
+
 ![Picture3](https://github.com/user-attachments/assets/3af36a8e-270b-4a0f-8175-00b388ab5010)
 
 However, when I tried to import Bugsy into Unity, the textures I had used didn’t come along because they weren’t part of the "Principled BSDF" under shading.
+
 ![Picture4](https://github.com/user-attachments/assets/5420e26f-9531-475a-8fe4-458429935c8f)
 
 Alternatively, I could have saved the additional elements as external textures and then added them separately in Unity, but I decided to prioritize focusing on animation instead (disadvantage of using an addon appearently :) ).
@@ -180,7 +182,8 @@ Now, Bugsy is ready to be used in Unity!
 When Bugsy was added to Unity, the animation needed some adjustments to ensure the loop was smooth. Since this was also a new program for me, there were many tools to familiarize myself with. I however managed to add the animation, keeping Bugsy in the same position without any movement, and the loop worked as intended.
 
 Since the goal is for Bugsy to be able to perform attacks, i used the “Animator” function to create a state machine, making it easier to implement a "fighting" pose in the future.
-![Picture6](https://github.com/user-attachments/assets/0a3e7e61-6332-44fe-9756-70d74f56c4b1)
+![Picture7](https://github.com/user-attachments/assets/38ae44de-ca67-48aa-8122-e7e7f2135167)
+
 
 ##### Next steps
 
