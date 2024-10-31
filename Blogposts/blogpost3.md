@@ -151,7 +151,36 @@ This method will then change the scene on all clients connected to the room.
 
 ##### Task 3 : Animate SDJ-course-mon
 
-- Merethe :)
+With some light feedback, Bugsy in his current state was a good fit for a horror game, so he received an upgrade to look a bit friendlier.
+![Picture3](https://github.com/user-attachments/assets/3af36a8e-270b-4a0f-8175-00b388ab5010)
+
+However, when I tried to import Bugsy into Unity, the textures I had used didn’t come along because they weren’t part of the "Principled BSDF" under shading.
+![Picture4](https://github.com/user-attachments/assets/5420e26f-9531-475a-8fe4-458429935c8f)
+
+Alternatively, I could have saved the additional elements as external textures and then added them separately in Unity, but I decided to prioritize focusing on animation instead (disadvantage of using an addon appearently :) ).
+
+Now i was ready to add animations in form of poses. To do this, i added an "armature" object, which gives the model a skeleton.
+
+![Picture5](https://github.com/user-attachments/assets/8f575625-9bef-4f28-b873-902d303629ec)
+
+It quickly became clear that some parts of Bugsy weren’t connected as i thought. For instance, it was important to use weight painting to indicate which body parts should move when the bones are manipulated, as Blender’s automatic weights weren’t quite accurate. It was also important to consider where to place the bones to make it easier to move the different parts when adding animations. I found inspiration from animal skeletons online.
+
+Since Bugsy isn’t a humanoid figure, it was difficult to find automatic animations online, so i had to explore and add keyframes myself.
+
+![Picture6](https://github.com/user-attachments/assets/33403f5c-6f90-41d0-a34f-ae5c343dbf31)
+
+Once again, i needed to see several tutorials until i understood how to use the animation function in Blender. As i began to understand the basic principles, i drew inspiration from “Pose to Pose: Blender Animation Workflow for Beginners” on YouTube, which helped me figure out how to approach Bugsy’s poses.
+
+I animated a still pose that can be used when Bugsy is rendered in Unity. The still pose involves Bugsy simply moving up and down in his position, running in a loop. I also aim to animate attacks, but that will depend on available time.
+
+Finally, i saved each frame after running “Render Animation,” allowing these frames to be used in Blender’s Video Editor for a clean rendering without the lags that often occur during editing. However, i noticed that the different poses were a bit too close together, causing Bugsy to move up and down rather quickly. This would also need to be adjusted before Bugsy could be used in Schoolimon.
+
+Now, Bugsy is ready to be used in Unity!
+
+When Bugsy was added to Unity, the animation needed some adjustments to ensure the loop was smooth. Since this was also a new program for me, there were many tools to familiarize myself with. I however managed to add the animation, keeping Bugsy in the same position without any movement, and the loop worked as intended.
+
+Since the goal is for Bugsy to be able to perform attacks, i used the “Animator” function to create a state machine, making it easier to implement a "fighting" pose in the future.
+![Picture6](https://github.com/user-attachments/assets/0a3e7e61-6332-44fe-9756-70d74f56c4b1)
 
 ##### Next steps
 
