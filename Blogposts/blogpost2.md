@@ -110,4 +110,17 @@ Another approach for converting the 2D image and importing it
 
 
 #### Task 3 : Create 3D model for SDJ-course-mon
-- Merthe blogpost :)
+I have focused a lot on 3D modeling in Blender. Blender is a program I’ve never tried before, and it’s definitely not very intuitive, so I’ve had to watch a lot of different tutorials to get a decent understanding of it and its tools. I wanted to start by making a Schoolimon right away, but I realized I lacked knowledge of the various functions — so instead, I started by creating the famous donut. With these tools, I could continue modeling “Bugsy,” which is meant to represent SDJ1.
+
+To create Bugsy, I used CoPilot to have AI generate a still photo that could be used as a modeling reference in Blender.
+
+![Picture1](https://github.com/user-attachments/assets/4412c880-e89a-4db8-8e92-19d3fd01a91c)
+![Picture2](https://github.com/user-attachments/assets/681837dd-3440-4a44-a8e1-5b1f703d2065)
+
+Since I wanted to experiment with Blender's features, I added hair and used BlenderKit’s addon to apply materials to Bugsy’s appearance. Bugsy is built using:
+
+- Mirror editing
+- Sculpting
+- Snapping bases (so the different parts are more cohesive)
+- Grouping, so the whole figure is connected
+- etc.
