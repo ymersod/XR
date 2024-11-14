@@ -9,6 +9,11 @@
 - Demo project -> empty 3d project
 - Building directly to headset
 
+Terrain
+- Low Poly terrain
+- Training table
+- Terrain colors?
+
 ##### Task 1: Hand tracking
 packages:
 - XR interaction tool kit
