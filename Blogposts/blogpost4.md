@@ -59,7 +59,7 @@ We decided to leave this part as is for now, and come back later after creating 
 
 ##### Next steps
 ###### Physics system
-We NEED to make a physics system on a rig asap, this is the core of the project.
+We NEED to make a physics system on a rig asap, as this is the core of the project.
 - We don't really have a concrete plan for this yet as there's not a lot of material online, we have to improvise a bit here
 - All we know is we need to figure out how to make a _RigidBody_ interact seamlessly with a rig somehow
 - Also some kind of math to get momentum like in _A difficuly game about climbing_
