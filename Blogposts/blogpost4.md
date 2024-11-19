@@ -195,6 +195,10 @@ Added that the card had to have been spotted recently before spawning.
 
 comes when one wins match, pressing button stops application.
 
+###### Nice to haves
+
+Would have had been nice with a system, where if one players systems sees a change in monster system, it would update the other players system. So that they could help each other with recognizing the cards positioning.
+
 ##### Task 2: Healthbar implementation on schoolmons
 
 ### VR Project
