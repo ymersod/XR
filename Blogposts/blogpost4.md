@@ -57,5 +57,20 @@ We decided to leave this part as is for now, and come back later after creating 
 
 ![image](https://github.com/user-attachments/assets/5658f573-b974-4eaf-82c5-c8c786e3c379)
 
+##### Next steps
+###### Physics system
+We NEED to make a physics system on a rig asap, this is the core of the project.
+- We don't really have a concrete plan for this yet as there's not a lot of material online, we have to improvise a bit here
+- All we know is we need to figure out how to make a _RigidBody_ interact seamlessly with a rig somehow
+- Also some kind of math to get momentum like in _A difficuly game about climbing_
 
+###### Level creation
+We want to create a finished level as to create a finished gameplay loop.
+- Should be able to climb up to the top
+- Should be able to fall down
+- _Maybe be able to grab stuff along the way up / down_
 
+###### Upgrading the world design
+We want to make the world more immersive
+- Adding cloud system to make the user feel like they are VERY high up in the air when climbing
+- Adding sound system to make the interaction with the world feel more satisfying and real
