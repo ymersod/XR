@@ -91,6 +91,9 @@ Since i don’t have a VR headset at home, i used the XR device simulator to che
 
 ### Task 4: Skybox (Merethe)
 To make the game more visually interesting and provide a sensory experience, i created a skybox that changes as time passes.
+![Untitled video - Made with Clipchamp](https://github.com/user-attachments/assets/9451f477-3f3f-432a-9736-9f442b612e1f)
+
+
 
 ### Task 4: Den anden siimooooon
 :)
