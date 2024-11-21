@@ -227,7 +227,8 @@ Time manager has a reference to the plane, and can then change the music accordi
 I also added a sound effect for when hitting the terrain. This was simply added by attaching the HitSounds script, which takes an audioSource, and triggers it to play. I added the Audio Source component to the terrain itself, and also gave the terrain the hitSound script. 
 
 Each hand then get a sphere collider component, where radius is set very low, so it doesn't repeat the sounds too much, and "is trigger" is enabled.
-![image](https://github.com/user-attachments/assets/f0722f18-e8cf-4f2f-9467-58b32df91f93)
+![image](https://github.com/user-attachments/assets/f34c1378-8193-4c88-8a45-1c604a7771e5)
+
 
 
 Now whenever we hit the terrain, a hit sound will appear.
