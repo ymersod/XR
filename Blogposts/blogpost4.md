@@ -199,7 +199,93 @@ comes when one wins match, pressing button stops application.
 
 Would have had been nice with a system, where if one players systems sees a change in monster system, it would update the other players system. So that they could help each other with recognizing the cards positioning.
 
-##### Task 2: Healthbar implementation on schoolmons
+### Task 2: Healthbar implementation on schoolmons and quiz logic
+For the first part of the fighting setup, i focused on creating a health bar to be placed above the schoolimon. I created a canvas in unity with an image component, adding sprites for the health bar border and a heart symbol. The health bar uses a Slider component for the fill, which changes based on the schoolimon’s health value. The fill itself is just a simple image component.
+
+Once the visual setup was done, i added the logic to update the health bar based on the schoolimon’s health!
+
+##### HealthBar.cs
+The HealthBar script is responsible for managing the health bar's appearance. It has a reference to a Slider, Gradient, and Image. The Slider adjusts as the health changes, the Gradient changes color based on the health, and the Image is the fill that changes as the health decreases.
+```csharp
+public void UpdateHealthBar(int health)
+{
+    slider.value = health;
+    fill.color = gradient.Evaluate(slider.normalizedValue);
+}
+```
+
+In the setter for health, i ensure that the healthBar only has one health, and that it is instantiated with correct health values, and it adds the UpdateHealthBar method to the onHealthChanged event. 
+
+```csharp
+	public Health Health
+	{
+		get => health; set
+		{
+			if (health != null)
+			{
+				health.OnHealthChanged -= UpdateHealthBar;
+			}
+
+			health = value;
+			slider.maxValue = Health.maxHealth;
+			health.OnHealthChanged += UpdateHealthBar;
+			UpdateHealthBar(health.currentHealth);
+		}
+	}
+
+```
+
+This way it automatically updates when the health changes.
+
+##### HealthBarManager.cs
+The HealthBarManager script handles multiple health bars. It spawns health bars when needed, updates their positions, and toggles them on or off depending on the schoolimon's state.
+First, we have the SpawnHealthBar method, and it creates and links the health bar to the target health:
+```csharp
+    public void SpawnHealthBar(Health health)
+    {
+        var healthBar = Instantiate(healthBarPrefab, transform);
+        healthBars.Add(healthBar.GetComponent<HealthBar>());
+        healthBar.GetComponent<HealthBar>().Health = health;
+    }
+
+```
+It is saved to a list, so we can keep track of all the healthbars, which makes it easier to work with, when we implement networking, so we can keep track of all the active bars.
+
+HealthBarManager also has an offset value, that sets the height og the health bar, above the schoolimon.
+
+It also have logic to set a health bar active or inactive, giving the possibility to adjust when the health bar is spawned, depending on the state of the schoolimon. 
+
+##### Health.cs
+This is the fun one!
+Health manages the health logic for each schoolimon. It reduces health when damage is taken and triggers the UpdateHealthBar method, so we actually get the effect of losing health. 
+The scripts has a healthBarManager, so it is possible to individually show/not show the health bar for each schoolimon. It also attaches that this health, shall have a health bar. 
+```csharp
+    void Start()
+    {
+        healthBarManager = FindFirstObjectByType<HealthBarManager>();
+        monster = GetComponent<Monster>();
+        healthBarManager.SpawnHealthBar(this);
+        if (pendingDamage > 0 && monster.monsterName == NetworkManager.otherMonsterName)
+        {
+            TakeDamage(pendingDamage);
+            pendingDamage = 0;
+        }
+        healthBarManager.TurnOffHealthBar(this);
+    }
+```
+So the entire logic for each schoolimon, is set in this script.
+
+Now with bugsy being the tester, it looked as it should!
+
+![image](https://github.com/user-attachments/assets/32e1ea1d-b669-4c2b-b395-c9d478baa9e7) ![image](https://github.com/user-attachments/assets/f4b074a7-44a7-47fa-ba35-0c96a63a3122) ![image](https://github.com/user-attachments/assets/9bd00190-19c8-4504-90fd-4cff8003cfad)
+
+(Notice that bugsy has gottes his own schoolimon card! :D )
+
+##### From health bar logic to the quizzzzzz
+Now that the logic for the health bars were set up, i needed to implement a new canvas, that would show some questions with associated answers. The whole idea was, that if i answered a question correctly, the entire logic for the schoolimon taking damage, should be applied - and if i choose an incorrect answer, no damage should be applied.
+
+SOOOO back at it again with the canvas!
+
 
 ### VR Project
 ##### About the project
