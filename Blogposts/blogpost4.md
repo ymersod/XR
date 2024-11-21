@@ -279,12 +279,127 @@ Now with bugsy being the tester, it looked as it should!
 
 ![image](https://github.com/user-attachments/assets/32e1ea1d-b669-4c2b-b395-c9d478baa9e7) ![image](https://github.com/user-attachments/assets/f4b074a7-44a7-47fa-ba35-0c96a63a3122) ![image](https://github.com/user-attachments/assets/9bd00190-19c8-4504-90fd-4cff8003cfad)
 
-(Notice that bugsy has gottes his own schoolimon card! :D )
+(Notice that bugsy has gotten his own schoolimon card! :D )
 
 ##### From health bar logic to the quizzzzzz
 Now that the logic for the health bars were set up, i needed to implement a new canvas, that would show some questions with associated answers. The whole idea was, that if i answered a question correctly, the entire logic for the schoolimon taking damage, should be applied - and if i choose an incorrect answer, no damage should be applied.
 
 SOOOO back at it again with the canvas!
+![image](https://github.com/user-attachments/assets/749c5157-0a67-4f16-bb3c-40597c5c5c3d)
+
+Simple as it can be, the canvas has a QuizPanel GameObject, that has a QustionPanel and four buttons (and i needed to add an eventSystem aswell, so i could interact with the buttons).
+And then back to the logic implementation. 
+
+#### questions.json
+Questions for each schoolimon type is saved in a json file. So bugsy for example represents java, so he has been given 15 questions for this topic:
+```csharp
+[
+  {
+    "monsterName": "Bugsy",
+    "questions": [
+      {
+        "question": "What is the correct way to declare a variable in Java?",
+        "answers": [
+          "int num = 10;",
+          "num int = 10;",
+          "10 = int num;",
+          "int = num 10;"
+        ],
+        "correctAnswer": 1
+      },
+	...
+```
+Then these questions should be used, if you choose to play bugsy. And if you use another, Realist for example, then his questions should be used. 
+
+##### QuestionsAndAnswers.cs
+QuestionsAndAnswers is a data object, that just contains a question, an array of answers, and the position of the correct answer. It is used as a DTO, so it can be used to store the json questions, and transform them to an object, that can be used in the quiz logic.
+
+##### QuizManager
+The QuizManager script controls the flow of the quiz. It manages question loading, canvas visibility, and applies damage when a correct answer is chosen.
+So when Start() is called, the folliwing happens:
+
+1. quiz canvas is set unactive, so it doesn't spawn, until it is going to be used
+2. StartCoroutine(WaitForMeshToSpawn()) starts a coroutine that iterates every frame, until the targetHealth component is found in the scene, ensuring that the quiz logic only proceeds once the target mesh is ready.
+
+```csharp
+   private IEnumerator WaitForMeshToSpawn()
+    {
+        // Keep waiting until the Health component is found
+        while (targetHealth == null)
+        {
+            targetHealth = FindObjectOfType<Health>();
+            yield return null;  // Wait a frame before checking again
+        }
+
+        Debug.Log("Health component assigned to QuizManager");
+        generateQuestion();
+        yield return StartCoroutine(FadeInCanvas()); // Wait for the canvas to fade in
+    }
+```
+
+3. The questionsAndAnswers is then used to store the quesitons:
+```csharp
+    private void LoadQuestionsFromJson()
+    {
+        TextAsset jsonFile = Resources.Load<TextAsset>("questions");  // Load "questions.json" from Resources
+        if (jsonFile != null)
+        {
+            questionsAndAnswers = JsonUtility.FromJson<ListWrapper>(jsonFile.text).questions;
+            Debug.Log("Questions loaded successfully");
+        }
+        else
+        {
+            Debug.LogError("Questions file not found!");
+        }
+    }
+```
+(Obs. this was the initial setup without networking, so it just looked for the first health object it could find, and not the type of schoolimon that are used)
+
+When the health is found, it starts generating random questions, and the canvas slowly fades in, and is interactble when FadeInCanvas() is done. A question and four answers are now shown.
+
+SetAnswers() is a method used, when generating questions. It updates the answer buttons with the answers for the current question. It assigns the answers to each button and marks the correct one based on the correctAnswer index.
+
+The logic for answering correctly:
+```csharp
+    public void correct()
+    {
+        // Apply damage to the target mesh
+        if (targetHealth != null)
+        {
+            targetHealth.TakeDamage(damageAmount);
+            if (targetHealth.currentHealth <= 0)
+            {
+                //Destroy(targetHealth.gameObject);
+                quizCanvas.SetActive(false);
+            }
+        }
+        questionsAndAnswers.RemoveAt(currentQuestion);
+        generateQuestion();
+    }
+```
+It uses the targetHealth, and uses the TakeDamage method. If the current health becomes lower than 0, the quiz canvas disappears. However, if the health was larger than 0, the question would be removed from the list (so it couldn't be reused), and a new question is generated. 
+A Destroy method was meant to be implemented, so it wasn't saved in memory when done, but we went with a scene shift, that would automatically do this.
+
+The logic for answering incorrectly:
+```csharp
+    public void wrong()
+    {
+        questionsAndAnswers.RemoveAt(currentQuestion);
+        generateQuestion();
+    }
+```
+This would simply remove the question, and then generate a new one. 
+Now this logic would apply damage to the first Schoolimon (if it has a health), if an question was answered correctly.
+
+##### AnswerScript
+The AnswerScript controls the logic for each answer option (UI button). Itsimply checks if the answer is correct or incorrect, and then uses quizManager to apply the correct logic when answered.
+
+##### An update
+So the logic for the fighting was done, but now it should be updated, so it could fit the multiplayer networking. This was done together with Simon S. 
+It should be considered:
+* How the turn based fighting was going to work
+* How each canvas should spawn for individual screens
+* Matching the questions with the schoolimon you use
 
 
 ### VR Project
