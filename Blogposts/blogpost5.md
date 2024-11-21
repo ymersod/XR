@@ -1,11 +1,13 @@
-SImooooon
+# AR project
+### Task 1: SImooooon
+(:
+
+# VR project
+### Task 2: Clouds and scenery (Merethe)
 
 
 
-### Clouds and scenery (Merethe)
 
 
-
-
-
-Den anden siimooooon
+### Task 3: Den anden siimooooon
+:)
