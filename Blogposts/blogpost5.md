@@ -96,17 +96,16 @@ To make the game more visually interesting and provide a sensory experience, i c
 To set this up, if initially installed "Fantasy Skybox FREE" from https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353.
 Then under the shaders folder, i copied the shader code from here: https://pastebin.com/1CSJmbYH, and then made a material from this. 
 
-![image](https://github.com/user-attachments/assets/2920c9b0-95bb-4448-bfb6-de7da3fcfb14)
-
 Then i added the Skybox material so the scenery's skybox material under lighting.
 
-![image](https://github.com/user-attachments/assets/73b5b415-1971-468d-998b-03f0be8d5372)
+![image](https://github.com/user-attachments/assets/f204315f-0a97-48ae-ba83-825bcf708667)
+
 
 The skybox material has two textures, that it shifts between:
 
 ![image](https://github.com/user-attachments/assets/818530c5-e2b1-494c-983e-a978de74ed41)
 
-Now to make a flow with the skybox and textures, i made a time manager:
+Now to make a flow with the skybox and textures, i made a time manager script:
 
 ![image](https://github.com/user-attachments/assets/f1035730-58f4-4aef-b3cc-a87ad8a811c3)
 
