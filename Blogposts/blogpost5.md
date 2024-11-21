@@ -37,6 +37,7 @@ To make the clouds more "blurry," i added another gradient noise but without mov
 ![image](https://github.com/user-attachments/assets/c3af4bac-0a65-4fd6-8f11-51608e6a227f)
 
 Giving this result:
+
 ![image](https://github.com/user-attachments/assets/91f1848a-4c51-4a45-964f-ae4c77410de0)
 ![image](https://github.com/user-attachments/assets/6e077b07-95ba-4bab-9a63-a2669514a3d3)
 
