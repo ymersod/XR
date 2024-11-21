@@ -8,6 +8,7 @@
 To create the cloud, i made a 100k mesh in Blender. I started by making a cylinder with zero height. Then i subdivided the triangles and made the outer edges "to spheres" so i could later add curvature.
 
 To ensure my mesh fit the scene, i set the length and width to 500m and scaled the disk so it was 1, 1, 1. The file was saved as an .fbx file and could now be used in Unity.
+
 ![image](https://github.com/user-attachments/assets/0d7f3aef-0149-491c-b9f1-5599dc88390f)![image](https://github.com/user-attachments/assets/67484868-b960-4f37-a851-0cce416d2724)
 
 ##### Texture and Projection
