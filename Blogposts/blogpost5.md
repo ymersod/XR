@@ -93,7 +93,76 @@ Since i don’t have a VR headset at home, i used the XR device simulator to che
 To make the game more visually interesting and provide a sensory experience, i created a skybox that changes as time passes.
 ![Untitled video - Made with Clipchamp](https://github.com/user-attachments/assets/9451f477-3f3f-432a-9736-9f442b612e1f)
 
+To set this up, if initially installed "Fantasy Skybox FREE" from https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353.
+Then under the shaders folder, i copied the shader code from here: https://pastebin.com/1CSJmbYH, and then made a material from this. 
 
+![image](https://github.com/user-attachments/assets/2920c9b0-95bb-4448-bfb6-de7da3fcfb14)
+
+Then i added the Skybox material so the scenery's skybox material under lighting.
+
+![image](https://github.com/user-attachments/assets/73b5b415-1971-468d-998b-03f0be8d5372)
+
+The skybox material has two textures, that it shifts between:
+
+![image](https://github.com/user-attachments/assets/818530c5-e2b1-494c-983e-a978de74ed41)
+
+Now to make a flow with the skybox and textures, i made a time manager:
+
+![image](https://github.com/user-attachments/assets/f1035730-58f4-4aef-b3cc-a87ad8a811c3)
+
+The script uses four textures (skyboxNight, skyboxSunrise, skyboxDay, skyboxSunset) to represent different times of the day.
+It also uses four gradients (gradientNightToSunrise, gradientSunriseToDay, gradientDayToSunset, gradientSunsetToNight) to control smooth color transitions for the global light and fog.
+
+To manage the time, the script tracks time in minutes, hours, and days. It uses properties (Minutes, Hours, and Days) to detect changes and trigger events like skybox or light transitions.
+
+The Update() method rotates the globalLight object to simulate the movement of the sun/moonn (or moon) across the sky.
+It also makes time progress with tempSecond; Time.deltaTime is the interval in seconds from last frame to current one. By using this, i can determine how often i want the minutes to increase in this interval. The lower speedOfTime is, the faster time goes in the scenery. 
+
+```csharp
+    public void Update()
+    {
+        tempSecond += Time.deltaTime;
+
+        globalLight.transform.Rotate(Vector3.up, (1f / (1440f / 4f)) * 360f, Space.World);
+
+        if (tempSecond >= speedOfTime)
+        {
+            Minutes += 1;
+            tempSecond = 0;
+        }
+    }
+```
+OnHoursChange, at specific hours (6, 10, 18, 22), it triggers:
+* A skybox transition between two textures.
+* A light color transition using gradients.
+10f is the duration of the fading.
+```csharp
+    private void OnHoursChange(int value)
+    {
+        if (value == 6)
+        {
+            StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 10f));
+            StartCoroutine(LerpLight(graddientNightToSunrise, 10f));
+        }
+        else if (value == 10)
+        {
+            StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 10f));
+            StartCoroutine(LerpLight(graddientSunriseToDay, 10f));
+        }
+        else if (value == 18)
+        {
+            StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 10f));
+            StartCoroutine(LerpLight(graddientDayToSunset, 10f));
+        }
+        else if (value == 22)
+        {
+            StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 10f));
+            StartCoroutine(LerpLight(graddientSunsetToNight, 10f));
+        }
+    }
+```
+
+LerpSkyBox interpolates between textures, and LerpLight interpolates the light color. 
 
 ### Task 4: Den anden siimooooon
 :)
