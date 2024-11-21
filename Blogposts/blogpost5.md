@@ -91,7 +91,8 @@ Since i don’t have a VR headset at home, i used the XR device simulator to che
 
 ### Task 4: Skybox (Merethe)
 To make the game more visually interesting and provide a sensory experience, i created a skybox that changes as time passes.
-![Untitled video - Made with Clipchamp](https://github.com/user-attachments/assets/9451f477-3f3f-432a-9736-9f442b612e1f)
+![Untitled video - Made with Clipchamp (1)](https://github.com/user-attachments/assets/0c76a00b-ad79-4a37-b4b1-354cae0e95a6)
+
 
 To set this up, if initially installed "Fantasy Skybox FREE" from https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353.
 Then under the shaders folder, i copied the shader code from here: https://pastebin.com/1CSJmbYH, and then made a material from this. 
