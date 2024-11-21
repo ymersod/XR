@@ -164,5 +164,70 @@ OnHoursChange, at specific hours (6, 10, 18, 22), it triggers:
 
 LerpSkyBox interpolates between textures, and LerpLight interpolates the light color. 
 
-### Task 4: Den anden siimooooon
+### Task 5: Sounds (Merethe)
+I added an AudioScript, that changes background music, and makes a fade effect between the changes. 
+
+```charp
+
+    public AudioSource backgroundAudio;
+    public AudioClip nightAudio;
+    public AudioClip sunriseAudio;
+    public AudioClip dayAudio;
+    public AudioClip sunsetAudio;
+
+    // Fade out the current audio, switch the clip, and fade it back in
+    public void ChangeBackgroundMusic(AudioClip newClip, float fadeDuration = 2f)
+    {
+        if (backgroundAudio.clip == newClip)
+            return; // Skip if the new clip is already playing
+
+        StartCoroutine(FadeOutAndChangeClip(newClip, fadeDuration));
+    }
+```
+
+So for each time of the day, a specific audio clip can be assigned, to fit that time. 
+The TimeManager then get an instance of AudioScript, so the ChangeBackgroundMusic can be applied in the OnHoursChange method
+
+```csharp
+
+    private void OnHoursChange(int value)
+    {
+        if (value == 6)
+        {
+            StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 10f));
+            StartCoroutine(LerpLight(graddientNightToSunrise, 10f));
+            audioManager.ChangeBackgroundMusic(audioManager.sunriseAudio);
+        }
+        else if (value == 10)
+        {
+            StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 10f));
+            StartCoroutine(LerpLight(graddientSunriseToDay, 10f));
+            audioManager.ChangeBackgroundMusic(audioManager.dayAudio);
+        }
+        else if (value == 18)
+        {
+            StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 10f));
+            StartCoroutine(LerpLight(graddientDayToSunset, 10f));
+            audioManager.ChangeBackgroundMusic(audioManager.sunsetAudio);
+        }
+        else if (value == 22)
+        {
+            StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 10f));
+            StartCoroutine(LerpLight(graddientSunsetToNight, 10f));
+            audioManager.ChangeBackgroundMusic(audioManager.nightAudio);
+        }
+    }
+```
+
+Then i found some appropiate sounds, that i wanted to use, and i compressed and shortened them, so the file size wouldn't be too big.
+Then our ground plane gets the Audio Script attached, including four different background sounds, and the music will play.
+Time manager has a reference to the plane, and can then change the music accordingly.
+
+
+I also added a sound effect for when hitting the terrain. This was simply added by attaching the HitSounds script, which takes an audioSource, and triggers it to play. I added the Audio Source component to the terrain itself, and also gave the terrain the hitSound script. 
+
+Now whenever we hit the terrain, a hit sound will appear.
+
+
+### Task 6: Den anden siimooooon
 :)
