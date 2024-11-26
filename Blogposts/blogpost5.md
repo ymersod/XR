@@ -233,8 +233,8 @@ Each hand then get a sphere collider component, where radius is set very low, so
 
 Now whenever we hit the terrain, a hit sound will appear.
 
-### Functionality
-### The rig
+## Functionality (Simon Due)
+### The rig (Simon Due)
 Task 6,7 and 8 depends heavily on us getting the rig to work in the way we want to. The rig was slowly upgraded from a very basic xr-origin rig with only camera, to a fully working physics rig later. So to not jump to much back in forth we will look at the rig now:
 
 ![image](https://github.com/user-attachments/assets/a1582d7f-ce88-4d70-91f6-b24e3699c46f)
@@ -250,7 +250,7 @@ The left/right hands also both contain an _interaction Visual_ gameObject, this 
 
 At the end we have our Physics XR Rig gameObject. This is standalone manager esque object that handles switching between using controller physics hands and hand tracking physics hands, as well as climbing mode hands. We will go more in depth on this in task 7 and 8.
 
-### Task 6: Physics system
+### Task 6: Physics system (Simon Due)
 The entire reason we decided upon creating our own VR-rig was because we found weird kinks/bugs and unknown stuff about the freely provided VR-rigs from Unity's packages.
 
 So starting from scratch we first of all added a RigidBody to simulate gravity on the entirety of the rig. Hereafter we added a collider on the main camera so the user doesnt fall through the floor. But this is just the basic stuff.
@@ -302,7 +302,7 @@ It's also important that this part of the code only works when grounded so we ad
     }
 ```
 
-### Task 7: Hand tracking 2.0
+### Task 7: Hand tracking 2.0 (Simon Due)
 So we really wanted to not be bound by controllers and let the user use their real hands for climbing, however this proved quite the undertaking...
 
 We actually made a solution for us to represent the hand movements of the player using the above mentioned physics code, but the problem is in creating a feels-good representation collision system for where the players hands currently are in world-space. Our solution for now ended up being using the _Skinned_mesh renderer_ under the ...Interaction Visual gameObjects from the hands on the XR Rig, baking a new mesh out of it every frame and updating the meshFilter + MeshColliders on physicsHands based on it every frame.
@@ -321,7 +321,7 @@ void UpdateMesh(bool updateMeshFilter)
 
 Looking back it makes sense that rendering multiple new meshes and colliders every frame at runtime propably isn't good for performance BUT for the future we have another idea, which is representing the hands as multiple capsule colliders on each bone and somehow getting a composite collider of those and apply them in the physics hands.
 
-### Task 8: Climbing system
+### Task 8: Climbing system (Simon Due)
 For the user to able to climb we have to use the _climb provider_ component, but as said it moves using a _Character Controller_ component. This means the locomotion system takes over the movement of the XR-rig. This is bad because we have to be careful about switching how the XR-rig is being moved, and we certainly found out why.
 
 We found that when letting go of the _climbing_interactable_ that the user was holding on to, they would be teleported back to where they started, this is exactly because when using climbing the locomotion system takes over and the rigidbody isn't manipulated and thus youre teleported back, so we had to a bit of hacky code for the rigidbody on the XR Rig to be properly updated:
@@ -387,7 +387,7 @@ The second part is we're disabling the physics hands of the controllers while cl
 
 We also made sure that the climbingManager knows that it should only deactivate climbing when 0 hands are attached. We do this by attaching this script to the events of _ClimbInteractable_ that each climbable object has.
 
-### Task 9: Level design
+### Task 9: Level design (Simon Due)
 The idea of the game is to climb to the top, alas we only have demo of how the gameplay loop would look. The objective of the game is to find more green bananas as you are a hungry monkey, and you have to climb the mountain to find the greenest bananas.
 Since we have no savepoints, as it's a foddian game, we wanted to start out nicely with some easy jumps for the player to get comfortable - then later switch into higher gears, with some harder jumps where the player would lose their progress and have to start from the bottom again. Shown below is our level design so far, with lines representing our biased opinion of the difficulty.
 
@@ -410,7 +410,7 @@ After teleport to top
 Trying get the easter egg without this process, might cause 'unforseen' consequenses to the players rigidbody >:)
 
 
-### Extra thoughts on Task 7, 8 & 9
+### Extra thoughts on Task 7, 8 & 9 (Simon Due)
 There's a lot of extra work that went into getting this to barely work, and whats shown above is only some of the final result, as we didnt want to write an entire novel. The physics system has been a jarring task to complete, and wasting ALOT of time trying to implemt it with hand tracking was a major obstacle that we unfortunately didn't fix.
 
 
