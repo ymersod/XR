@@ -289,20 +289,128 @@ To actually move the player when the player slams the the ground with the Physic
 
 ```
 
-It's also important that this part of the code only works when grounded so we added a check on 
-
-
+It's also important that this part of the code only works when grounded so we added a flag disabling HookesLaw movement if not grounded. The FixedUpdate loop looks something like this. We use fixedUpdate instead of update because it's physics stuff :)
 ```csharp
-
-
+ void FixedUpdate()
+    {
+        PIDMovement();
+        PIDRotation();
+        timer -= Time.fixedDeltaTime;
+        if (_isColliding && timer <= 0) {
+            HookesLaw();
+        }
+    }
 ```
 
+### Task 7: Hand tracking 2.0
+So we really wanted to not be bound by controllers and let the user use their real hands for climbing, however this proved quite the undertaking...
 
+We actually made a solution for us to represent the hand movements of the player using the above mentioned physics code, but the problem is in creating a feels-good representation collision system for where the players hands currently are in world-space. Our solution for now ended up being using the _Skinned_mesh renderer_ under the ...Interaction Visual gameObjects from the hands on the XR Rig, baking a new mesh out of it every frame and updating the meshFilter + MeshColliders on physicsHands based on it every frame.
+```csharp
+void UpdateMesh(bool updateMeshFilter)
+    {
+        Mesh backedMesh = new Mesh();
+        skinnedMeshRenderer.BakeMesh(backedMesh);
+        meshCollider.sharedMesh = backedMesh;
+        meshColliderTrigger.sharedMesh = backedMesh;
+        _meshFilter.mesh = backedMesh;
+    }
 
+```
+ In theory we think the solution works, but it seems hardware limitations has caught up to us at this points. The physics system cant keep up with the requirements any more, as an example gravity barely exists anymore. It also had some 'interesting' interactions with the physics movement system that made it quite unplayable.
 
+Looking back it makes sense that rendering multiple new meshes and colliders every frame at runtime propably isn't good for performance BUT for the future we have another idea, which is representing the hands as multiple capsule colliders on each bone and somehow getting a composite collider of those and apply them in the physics hands.
 
-
-### Task 7: Hand tracking physiscs
 ### Task 8: Climbing system
+For the user to able to climb we have to use the _climb provider_ component, but as said it moves using a _Character Controller_ component. This means the locomotion system takes over the movement of the XR-rig. This is bad because we have to be careful about switching how the XR-rig is being moved, and we certainly found out why.
+
+We found that when letting go of the _climbing_interactable_ that the user was holding on to, they would be teleported back to where they started, this is exactly because when using climbing the locomotion system takes over and the rigidbody isn't manipulated and thus youre teleported back, so we had to a bit of hacky code for the rigidbody on the XR Rig to be properly updated:
+```csharp
+public class ClimbingManager : MonoBehaviour
+{
+    [SerializeField] GameObject RightHandThingy;
+    [SerializeField] GameObject LeftHandThingy;
+    [SerializeField] GameObject RightHandClimbing;
+    [SerializeField] GameObject LeftHandClimbing;
+    [SerializeField] Transform headPos;
+    [SerializeField] Transform xrRig;
+    [SerializeField] Rigidbody playerRb;
+    [SerializeField] CharacterController characterController;
+    private int nrActive = 0;
+    public void ActiveClimbing()
+    {
+        playerRb.isKinematic = true;
+        playerRb.useGravity = false;
+
+        RightHandClimbing.SetActive(true);
+        LeftHandClimbing.SetActive(true);
+        RightHandThingy.SetActive(false);
+        LeftHandThingy.SetActive(false);
+        LeftHandThingy.GetComponent<PhysicsController>()._isColliding = false;
+        RightHandThingy.GetComponent<PhysicsController>()._isColliding = false;
+        nrActive++;
+    }
+
+    public void DeactiveClimbing()
+    {
+        nrActive--;
+        if(nrActive == 0) {
+            playerRb.isKinematic = false;
+            playerRb.useGravity = true;
+
+            RightHandClimbing.SetActive(false);
+            LeftHandClimbing.SetActive(false);
+            RightHandThingy.SetActive(true);
+            LeftHandThingy.SetActive(true);
+            RightHandThingy.GetComponent<PhysicsController>().SetTimer();
+            LeftHandThingy.GetComponent<PhysicsController>().SetTimer();
+            playerRb.linearVelocity = Vector3.zero;
+            playerRb.angularVelocity = Vector3.zero;
+        }
+    }
+
+    void LateUpdate()
+    {
+        if(nrActive > 0)
+        {
+            playerRb.position = characterController.transform.position;
+            playerRb.linearVelocity = Vector3.zero;
+            playerRb.angularVelocity = Vector3.zero;
+        }
+    }
+}
+```
+
+This system ensure first of all that the players rigidBody is always updated to the location of the characterController and sets the velocity of it to 0 to make sure no funny stuff is happening when moving back to the physics control system.
+
+The second part is we're disabling the physics hands of the controllers while climbing, as they would continue to fall and feel really bad to use - hence the climbing hands. The climbing hands are more or less just transforms that follow the xr-controllers transform so the player knows where their hands are in the game.
+
+We also made sure that the climbingManager knows that it should only deactivate climbing when 0 hands are attached. We do this by attaching this script to the events of _ClimbInteractable_ that each climbable object has.
+
 ### Task 9: Level design
+The idea of the game is to climb to the top, alas we only have demo of how the gameplay loop would look. The objective of the game is to find more green bananas as you are a hungry monkey, and you have to climb the mountain to find the greenest bananas.
+Since we have no savepoints, as it's a foddian game, we wanted to start out nicely with some easy jumps for the player to get comfortable - then later switch into higher gears, with some harder jumps where the player would lose their progress and have to start from the bottom again. Shown below is our level design so far, with lines representing our biased opinion of the difficulty.
+
+![image](https://github.com/user-attachments/assets/b3d7a817-9e56-4282-8415-a029eb0daf90)
+
+As seen above we tried to progressively make it harder, and from our tests it seems to be correct that the red-line jump is by FAR the hardest jump. But a reward is present at top if the user manages to get up there (_one way or another_)
+
+To spice the game up a little bit we made an easter egg secret course, this is a very hard climbing course based around known bugs in the game the course is shown below:
+
+![image](https://github.com/user-attachments/assets/0b20bd78-023b-48f3-b020-9be850185975)
+
+To even get into the course you have to abuse the charactercontroller taking over movement when climbing and climbing into the mountain, then after finishing the grueling climbing in there you have to:
+- First let go of the blue rock
+- Within 2 seconds activate hand tracking (can be done by clicking controllers together 2 times irl)
+- Hold hands up in the air
+After teleport to top
+- Press the menu botton to activate controllers again
+- Go back into the game, and youre at the top of the mountain - with the elusive delicious YELLOW BANANA
+
+Trying get the easter egg without this process, might cause 'unforseen' consequenses to the players rigidbody >:)
+
+
+### Extra thoughts on Task 7, 8 & 9
+There's a lot of extra work that went into getting this to barely work, and whats shown above is only some of the final result, as we didnt want to write an entire novel. The physics system has been a jarring task to complete, and wasting ALOT of time trying to implemt it with hand tracking was a major obstacle that we unfortunately didn't fix.
+
 
