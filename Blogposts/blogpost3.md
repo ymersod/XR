@@ -2,7 +2,7 @@
 
 #### Project Summary
 
-##### Task 1 : Update of tracking of monsters and introducing a simple state system
+##### Task 1 : Update of tracking of monsters and introducing a simple state system (Simon Sohn)
 
 yea boy, its me.
 
@@ -99,7 +99,7 @@ here is some weird drawing I did:
 
 don't know how much sense it makes for others, but me brainy know what it means :)
 
-##### Task 2 : Setup multiplayer
+##### Task 2 : Setup multiplayer (Simon Due)
 
 We want to feature a _'fighting'_ system in the game between 2 different users of the app.
 
@@ -149,17 +149,17 @@ After the request is handled by the server it returns the Callback on the **Chan
 As seen in the screenshot it's annotated with `[PunRPC]` this means that this method can be used a Remote Procedure Callback.
 This method will then change the scene on all clients connected to the room.
 
-##### Task 3 : Animate SDJ-course-mon
+##### Task 3 : Animate SDJ-course-mon (Merethe)
 
 With some light feedback, Bugsy in his current state was a good fit for a horror game, so he received an upgrade to look a bit friendlier.
 
 ![Picture3](https://github.com/user-attachments/assets/3af36a8e-270b-4a0f-8175-00b388ab5010)
 
-However, when I tried to import Bugsy into Unity, the textures I had used didn’t come along because they weren’t part of the "Principled BSDF" under shading.
+However, when i tried to import Bugsy into Unity, the textures i had used didn’t come along because they weren’t part of the "Principled BSDF" under shading.
 
 ![Picture4](https://github.com/user-attachments/assets/5420e26f-9531-475a-8fe4-458429935c8f)
 
-Alternatively, I could have saved the additional elements as external textures and then added them separately in Unity, but I decided to prioritize focusing on animation instead (disadvantage of using an addon appearently :) ).
+Alternatively, i could have saved the additional elements as external textures and then added them separately in Unity, but i decided to prioritize focusing on animation instead (disadvantage of using an addon appearently :) ).
 
 Now i was ready to add animations in form of poses. To do this, i added an "armature" object, which gives the model a skeleton.
 
@@ -211,7 +211,3 @@ Some of the key elements we want to work on for this part is:
 
 - What should happen when a card cant be found anymore, when the camera is looking at the position where the card should be.
 - The switch mon state is not gonna work as intended, we will only have 2 mons in game, one for each player, so no need for switching.
-
-###### Animations??
-
-Er der noget logik her der skal laves her Merethe til de forskellige animationer? :D
