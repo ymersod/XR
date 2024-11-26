@@ -31,7 +31,7 @@ Player 2 - Global Business Engineer - Team management
 
 ### Tasks for 01/10/24
 
-#### Task 1: Setup repository and make som virtual tracking of cards
+#### Task 1: Setup repository and make som virtual tracking of cards (Simon Sohn)
 
 ![image](https://github.com/user-attachments/assets/2f34bb73-a52f-4b08-b145-ffdbf868fab6)
 
@@ -81,7 +81,7 @@ Here is a pic of the android tracking the image:
 
 Jep, thats pretty mush it, love and all that!
 
-#### Task 2: Create 3D model for the XR-Course-mon
+#### Task 2: Create 3D model for the XR-Course-mon (Simon Due)
 
 ##### XR - Schoolmon
 
@@ -109,7 +109,7 @@ Another approach for converting the 2D image and importing it
 ![image](https://github.com/user-attachments/assets/4bcf8ff5-a213-4fa7-b34b-6c0ee0bc239e)
 
 
-#### Task 3 : Create 3D model for SDJ-course-mon
+#### Task 3 : Create 3D model for SDJ-course-mon (Merethe)
 I have focused a lot on 3D modeling in Blender. Blender is a program I’ve never tried before, and it’s definitely not very intuitive, so I’ve had to watch a lot of different tutorials to get a decent understanding of it and its tools. I wanted to start by making a Schoolimon right away, but I realized I lacked knowledge of the various functions — so instead, I started by creating the famous donut. With these tools, I could continue modeling “Bugsy,” which is meant to represent SDJ1.
 
 To create Bugsy, I used CoPilot to have AI generate a still photo that could be used as a modeling reference in Blender.
