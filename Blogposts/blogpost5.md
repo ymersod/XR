@@ -233,6 +233,76 @@ Each hand then get a sphere collider component, where radius is set very low, so
 
 Now whenever we hit the terrain, a hit sound will appear.
 
+### Functionality
+### The rig
+Task 6,7 and 8 depends heavily on us getting the rig to work in the way we want to. The rig was slowly upgraded from a very basic xr-origin rig with only camera, to a fully working physics rig later. So to not jump to much back in forth we will look at the rig now:
 
-### Task 6: Den anden siimooooon
-:)
+![image](https://github.com/user-attachments/assets/a1582d7f-ce88-4d70-91f6-b24e3699c46f)
+
+Going from top to bottom, it shows that we have a very sparse locomotion system. We wanted to constrain the users movements to only be using our own physics system, and thus all we needed was the functionality from the _climbing provider_ component provided by XR Toolkit. The problem here is that using the provided locomotion system requires a _Character Controller_(or another manually create component IXR Body Posistion Evaluator) which we would add another layer of functionality, we went for the character controller, as we know it works with the _climb provider_.
+
+The main camera is default setup.
+
+All left/right hand/controllers implement more or less the same logic for interactions. We only needed to be able to interact with objects and throw them around for our game so we set up a _Near-far Interactor_ on each gameObject and set the settings up ensuring only near casting. So all other components provided from XR-toolkit can be excluded for now.
+![image](https://github.com/user-attachments/assets/5d173363-0474-4290-a493-af35811eb5f5)
+
+The left/right hands also both contain an _interaction Visual_ gameObject, this gameObjects purpose are to render the hands of the player when using hand-tracking on a headset that provides that functionality. And has a major impact on Task 7. Also the hand tracking is dependent on the VR-hands package, which allows us to use the Hand Visualizer component to visualize the users hands at runtime.
+
+At the end we have our Physics XR Rig gameObject. This is standalone manager esque object that handles switching between using controller physics hands and hand tracking physics hands, as well as climbing mode hands. We will go more in depth on this in task 7 and 8.
+
+### Task 6: Physics system
+The entire reason we decided upon creating our own VR-rig was because we found weird kinks/bugs and unknown stuff about the freely provided VR-rigs from Unity's packages.
+
+So starting from scratch we first of all added a RigidBody to simulate gravity on the entirety of the rig. Hereafter we added a collider on the main camera so the user doesnt fall through the floor. But this is just the basic stuff.
+
+The interesting stuff is how we're handling movement without a locomotion system on our rig. For the moment the system only works using the controllers, however the logic is implemented for hand-tracking but we didn't get it to a high enough quality in time unfortunately, so we'll be focusing on the physics using the controllers.
+
+First The  Physics ControllerMode... objects in the **Physics XR Rig** follow the XR-controllers used in real life. It looks something like this
+![image](https://github.com/user-attachments/assets/7fafcdf7-6c99-442a-87e4-0e7478b0e887)
+
+They track the controllers using this movement script. This is mostly some boring physics stuff, the important part is that using script combined with a rigidBody and colliders on the Physics ControllerMode... ojects allow us to move the gameobject around representing exactly where the controller would be, while still respecting collision with the environment. 
+```csharp
+void PIDMovement()
+    {
+        float kp = (6f * frequency) * (6f * frequency) * 0.25f;
+        float kd = 4.5f * frequency * damping;
+        float g = 1 / (1 + kd * Time.fixedDeltaTime + kp * Time.fixedDeltaTime * Time.fixedDeltaTime);
+        float ksg = kp * g;
+        float kdg = (kd + kp * Time.fixedDeltaTime) * g;
+        Vector3 force = (target_transform.position - transform.position) * ksg + (playerRigidbody.linearVelocity - _rigidbody.linearVelocity) * kdg;
+        _rigidbody.AddForce(force, ForceMode.Acceleration);
+    }
+```
+
+To actually move the player when the player slams the the ground with the Physics ControllerMode... objects we use a mathematical equation called HookesLaw, the jist is that that gameObject acts like a spring, and when when touching something that spring pops and propels the XR-Rigs rigidbody in the opposite upwards direction the hands were coming from.
+```csharp
+ void HookesLaw()
+    {
+        Vector3 displacementFromResting = transform.position - target_transform.position;
+
+        Vector3 force = displacementFromResting * climbForce;
+        float drag = GetDrag();
+        
+        playerRigidbody.AddForce(force, ForceMode.Acceleration);
+        playerRigidbody.AddForce(drag * -playerRigidbody.linearVelocity * climbDrag, ForceMode.Acceleration);
+    }
+
+```
+
+It's also important that this part of the code only works when grounded so we added a check on 
+
+
+```csharp
+
+
+```
+
+
+
+
+
+
+### Task 7: Hand tracking physiscs
+### Task 8: Climbing system
+### Task 9: Level design
+
