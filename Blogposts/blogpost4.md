@@ -202,7 +202,7 @@ It should be considered:
 * How each canvas should spawn for individual screens
 * Matching the questions with the schoolimon you use
 
-#### Task 2: Finishing gameplay loop & setting up multiplayer functionality ingame (Simon Sohn)
+### Task 2: Finishing gameplay loop & setting up multiplayer functionality ingame (Simon Sohn)
 
 ##### Start when both players are ready
 
