@@ -2,5 +2,5 @@
 # AR
 https://github.com/Lemske/Schoolmon
 
-€ VR
+# VR
 https://github.com/ymersod/ClimbingOverIt2
