@@ -446,7 +446,7 @@ Other than that we found that it was pretty fun to simply climb the mountain dir
 
 ![alt text](ClimbingMountain.png)
 
-It might have been interesting to incorporate some design some ledges into the mountain instead and climbing it.
+It might have been interesting to incorporate some ledges onto the mountain instead and climbing that.
 
 #### Other thingies
 
