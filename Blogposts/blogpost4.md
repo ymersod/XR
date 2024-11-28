@@ -280,7 +280,7 @@ public class Health : MonoBehaviour
 
 Using a lot of static variables around the code, not happy about many of them. This one would be bad if we the game ever needed multi-combat in some form. But since we don't expect more than 2 monster in this game and no switching, its fine.
 
-##### Monster movement (Merethe)
+##### Monster movement (Simon Sohn)
 
 Began thinking about implementing custom movement logic for monsters. Just did some for Bugsy the bug.
 
