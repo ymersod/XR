@@ -32,6 +32,7 @@ Okay I will more or less only be talking about my issues developing for VR for t
 Before i continue, i want to say im very sorry for all the dead code in the project - to me it's a reminder of all the approaches i tried to solve some of the problems below that yielded no result. 
 Im not lying when i say this has propably been the most painful dev experience i ever had. I think i'm the only one on the entire fu***** internet that has made a physics system with the newest versions of XR Interaction toolkit and Unity 6.0.
 It's a shame i didnt have more time to work on the vr core functionality as i finally feel like i know whats happening behind the scenes... at least it barely works :) 
+
 If i had more time i would have worked on:
 - Creating a more appealing gameplay-loop
 - Fixing kinks in the physics (it's very bouncy)
