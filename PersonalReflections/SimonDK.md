@@ -7,14 +7,14 @@ I still feel like we made the right choice with our workflow though, as i don't 
 #### My contributions
 Most of my contributions lie in the VR part but for the AR project i worked on:
 
-##### AR (10-20% of total contributions to the projects)
+##### AR (20% of total time contributed to the projects)
 - 3D Model
 I wanted to explore what the possibilities were for creating 3D Models using AI, and if it made more sense that creating a 3D Model from scratch. I provided the AI's i tried with a .PNG of a character i wanted converted to a 3D model that could be imported to Unity. My conclusion on this part is that the free solutions at least are not mature enough for developers to take advantage of this technology yet. It feels like it both stayed to true the 2D aspect of the character and weren't creative enough to make a proper model from my sketch.
 
 - Setting up multiplayer
 My part here lied in doing all the setup for 2 users to be able to play our game together. More or less was just connecting the app to the photon cloud provider, and doing some VERY simple UI and basic code setup for the multiplayer to work.
 
-##### VR (90-80% of total contributions to the projects)
+##### VR (80% of total time contributed to the projects)
 - VR Rig setup
 We had a bit of niche use case where we couldn't really use the provided XR Rigs given my packages. So i created our own Rig for our specific Use Case, with the big problem that it had to be able to integrate with our physics movement system.
 
@@ -31,7 +31,13 @@ In tandem with the others :)
 Okay I will more or less only be talking about my issues developing for VR for this part, as it's my main contribution.
 Before i continue, i want to say im very sorry for all the dead code in the project - to me it's a reminder of all the approaches i tried to solve some of the problems below that yielded no result. 
 Im not lying when i say this has propably been the most painful dev experience i ever had. I think i'm the only one on the entire fu***** internet that has made a physics system with the newest versions of XR Interaction toolkit and Unity 6.0.
-It's a shame i didnt have more time to work on the vr core functionality as i finally feel like i know whats happening behind the scenes... at least it barely works :)
+It's a shame i didnt have more time to work on the vr core functionality as i finally feel like i know whats happening behind the scenes... at least it barely works :) 
+
+If i had more time i would have worked on:
+- Creating a more appealing gameplay-loop
+- Fixing kinks in the physics (it's very bouncy)
+- Upgrading climbing mechanincs (i want momentum when letting go, but its hard to do right while using current locomotion system)
+- Actually making hand tracking work fully with our core system.
 
 ##### Package Versions
 As hinted at above i believe we had to use the newest packages for XR Development, as older versions had either non-supported components or totally deprecated components. This resulted in a LOT of trial and error when creating the rig and implementing the components provided by the packages, as documentation was sparse - and other devs using the packages were non-existant. I found work-arounds in the end based on older implementation of components and guesswork, but 5-10 hours at least were lost trying to figure out how the new components were working. Again this wouldn't have been a problem had we not decided to do some major changes to the core foundation of the XR-rig
