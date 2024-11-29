@@ -1,6 +1,6 @@
 # Simon Sohn Christensen - Personal Reflections
 
-So, now we have "finished" both the AR and VR project. I'll simply go over what I've felt/learned from each in their own category.
+So, now we have "_finished_" both the AR and VR project. I'll simply go over what I've felt/learned from each in their own category.
 
 ## AR - Schoolmon
 
@@ -35,6 +35,6 @@ As said in the final blogpost I primarily functioned as a game tester doing this
 
 I did contribute ideas for fixing certain bugs and participated in pair-programming sessions(_as an observer_).
 
-While we had planed for me to take the responsibility for the AR portion, and having less to do with the code in VR, I would have have liked to get more hands-on experience with coding for VR as well - getting a bit more "dirt under my nails" so to speak :)
+While we had planed for me to take the responsibility for the AR portion, and having less to do with the code in VR, I would have have liked to get more hands-on experience with coding for VR as well - getting a bit more "_dirt under my nails_" so to speak :)
 
 But I did learn though playtesting how important frame rate is for delivering a comfortable experience. In the game, you can hit your hands together, transitioning from controller tracking to hand tracking. However the implementation of hand tracking slowed down the game substantially. One did feel a bit uncomfortable going so drastically from one pace to another.
