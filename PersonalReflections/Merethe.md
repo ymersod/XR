@@ -1,5 +1,5 @@
 # Merethe Lundgreen – Personal reflection
-It has been my first time trying to use both blender and unity, so that has been a learning path in itself. I didn’t know how to use the programs, and I didn’t know how to structure my workflow effectively at the beginning.
+It has been my first time trying to use both blender and unity, so that has been a learning path in itself. I didn’t know how to use the programs, and I didn’t know how to structure my workflow effectively at the beginning, but as the projects went out, I got more and more tools to work with.
 
 ## The AR part
 So to kick it all off, I wanted to learn to make a 3D model, and that took a lot of hours and a lot of different youtube tutorials, until I had a basic understanding of vertices, edges, and faces, and how to manipulate these. It also resulted in a lot of weird shapes, that I hoped I could ignore, until I tried to import the mesh into unity. Here I could see, that it didn’t behave as I expected, because the geometry was weird. This led to learning more about mesh optimization, fixing normals, and cleaning up unnecessary vertices – and keeping in mind how to minimize the rendering cost in the future.
